@@ -36,6 +36,9 @@
 .movie-holder {
     display: flex;
     gap: 20px;
+    justify-content: center;
+    width: 100%;
+    padding: 12px;
 }
 .movie-img-wrapper {
     width: 120px;
