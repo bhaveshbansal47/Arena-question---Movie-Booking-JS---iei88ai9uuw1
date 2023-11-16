@@ -17,7 +17,7 @@ function createMovieCardsUi(movies) {
     let movieCardsHtml = ''
     for (const movie of movies) {
         const anchorTagNode = document.createElement('a')
-        anchorTagNode.setAttribute('class','movie-link')
+        anchorTagNode.setAttribute('class', 'movie-link')
         anchorTagNode.innerHTML = `
         <div class="movie" data-d="${movie.name}">
         <div class="movie-img-wrapper" style="background-image: url('${movie.imgUrl}'); background-size: cover;"> 
@@ -25,12 +25,12 @@ function createMovieCardsUi(movies) {
         <h4>${movie.name}</h4>
         </div>
        `
-       anchorTagNode.addEventListener('click', function() {
-        console.log('hello')
-       })
-       movieContainerNode.appendChild(anchorTagNode)
+        anchorTagNode.addEventListener('click', function () {
+            showSeats(movie.name)
+        })
+        movieContainerNode.appendChild(anchorTagNode)
     }
-    
+
     mainNode.appendChild(movieContainerNode)
     // bad idea to attach an event listener
 
@@ -40,6 +40,26 @@ function createMovieCardsUi(movies) {
     //         console.log('hello')
     //     })
     // }
+}
+
+function showSeats(movieName) {
+    mainNode.appendChild(loader)
+    fetchMovieAvailability(movieName).then(function (result) {
+        loader.remove()
+        removeVNoneClasses()
+    })
+}
+
+function removeVNoneClasses() {
+    const vNoneNodes = [...document.getElementsByClassName('v-none')]
+    for (const vNoneNode of vNoneNodes) {
+        vNoneNode.removeAttribute('class')
+    }
+}
+
+function makeGrids() {
+    // home work
+    
 }
 
 
