@@ -16,25 +16,30 @@ function createMovieCardsUi(movies) {
     movieContainerNode.setAttribute('class', 'movie-holder')
     let movieCardsHtml = ''
     for (const movie of movies) {
-        movieCardsHtml += `<a class="movie-link" href="#">
+        const anchorTagNode = document.createElement('a')
+        anchorTagNode.setAttribute('class','movie-link')
+        anchorTagNode.innerHTML = `
         <div class="movie" data-d="${movie.name}">
         <div class="movie-img-wrapper" style="background-image: url('${movie.imgUrl}'); background-size: cover;"> 
         </div>
         <h4>${movie.name}</h4>
         </div>
-        </a>
        `
+       anchorTagNode.addEventListener('click', function() {
+        console.log('hello')
+       })
+       movieContainerNode.appendChild(anchorTagNode)
     }
     
-
-    movieContainerNode.innerHTML = movieCardsHtml
     mainNode.appendChild(movieContainerNode)
-    const movieCards = document.getElementsByClassName('movie-link')
-    for(const movieCard of movieCards) {
-        movieCard.addEventListener('click', function() {
-            console.log('hello')
-        })
-    }
+    // bad idea to attach an event listener
+
+    // const movieCards = document.getElementsByClassName('movie-link')
+    // for(const movieCard of movieCards) {
+    //     movieCard.addEventListener('click', function() {
+    //         console.log('hello')
+    //     })
+    // }
 }
 
 
