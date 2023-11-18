@@ -45,6 +45,31 @@
     height: 200px;
 }
 
+#booker-grid-holder {
+  display: flex;
+  width: 80vw;
+  margin: auto;
+  justify-content: space-around;
+}
+
+.booking-grid {
+  display: flex;
+  width: 32vw;
+  flex-wrap: wrap;
+  padding: 1.28vw;
+  gap: 1.28vw
+}
+
+.booking-grid > div {
+  display: flex;
+  width: 6.4vw;
+  background-color: green;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 12px;
+  height: 6vw;
+}
+
 .d-none {
   display: none;
 }
