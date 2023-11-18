@@ -43,29 +43,28 @@ function createMovieCardsUi(movies) {
 
 function showSeats(movieName) {
     mainNode.appendChild(loader)
-    fetchMovieAvailability(movieName).then(function (result) {
+    fetchMovieAvailability(movieName).then(function (availableSeats) {
         loader.remove()
-        console.log(result)
         // removeVNoneClasses()
-        createSeatsUi()
+        createSeatsUi(availableSeats)
     })
 }
 
-function createSeatsUi() {
+function createSeatsUi(availableSeats) {
     const bookerGridHolderNode = document.getElementById('booker-grid-holder')
-    for(let i = 1; i <= 2; i++) {
+    bookerGridHolderNode.innerHTML = ''
+    for (let i = 1; i <= 2; i++) {
         const bookingGridNode = document.createElement('div')
-        bookingGridNode.setAttribute('class','booking-grid')
-        for(let j = ((i - 1) * 12) + 1; j <= i * 12; j++) {
+        bookingGridNode.setAttribute('class', 'booking-grid')
+        for (let j = ((i - 1) * 12) + 1; j <= i * 12; j++) {
             const bookingGridCellNode = document.createElement('div')
             bookingGridCellNode.setAttribute('id', `booking-grid-${j}`)
+            bookingGridCellNode.style.backgroundColor = availableSeats.includes(j) ? 'green' : 'red'
             bookingGridCellNode.innerText = j
             bookingGridNode.appendChild(bookingGridCellNode)
         }
         bookerGridHolderNode.appendChild(bookingGridNode)
     }
-    
-
 }
 
 function removeVNoneClasses() {
@@ -77,7 +76,7 @@ function removeVNoneClasses() {
 
 function makeGrids() {
     // home work
-    
+
 }
 
 

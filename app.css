@@ -63,7 +63,6 @@
 .booking-grid > div {
   display: flex;
   width: 6.4vw;
-  background-color: green;
   justify-content: center;
   align-items: center;
   margin-bottom: 12px;
