@@ -14,7 +14,6 @@ fetchMovieList().then(function (movies) {
 function createMovieCardsUi(movies) {
     const movieContainerNode = document.createElement('div')
     movieContainerNode.setAttribute('class', 'movie-holder')
-    let movieCardsHtml = ''
     for (const movie of movies) {
         const anchorTagNode = document.createElement('a')
         anchorTagNode.setAttribute('class', 'movie-link')
@@ -46,8 +45,27 @@ function showSeats(movieName) {
     mainNode.appendChild(loader)
     fetchMovieAvailability(movieName).then(function (result) {
         loader.remove()
-        removeVNoneClasses()
+        console.log(result)
+        // removeVNoneClasses()
+        createSeatsUi()
     })
+}
+
+function createSeatsUi() {
+    const bookerGridHolderNode = document.getElementById('booker-grid-holder')
+    for(let i = 1; i <= 2; i++) {
+        const bookingGridNode = document.createElement('div')
+        bookingGridNode.setAttribute('class','booking-grid')
+        for(let j = ((i - 1) * 12) + 1; j <= i * 12; j++) {
+            const bookingGridCellNode = document.createElement('div')
+            bookingGridCellNode.setAttribute('id', `booking-grid-${j}`)
+            bookingGridCellNode.innerText = j
+            bookingGridNode.appendChild(bookingGridCellNode)
+        }
+        bookerGridHolderNode.appendChild(bookingGridNode)
+    }
+    
+
 }
 
 function removeVNoneClasses() {
