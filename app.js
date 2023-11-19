@@ -61,15 +61,15 @@ function createSeatsUi(availableSeats) {
             const bookingGridCellNode = document.createElement('div')
             bookingGridCellNode.setAttribute('id', `booking-grid-${j}`)
             const available = availableSeats.includes(j)
-            if(available) {
-                bookingGridCellNode.style.backgroundColor =  'green'
+            if (available) {
+                bookingGridCellNode.style.backgroundColor = 'green'
                 bookingGridCellNode.setAttribute('class', 'available-seat')
                 bookingGridCellNode.addEventListener('click', selectSeat)
             } else {
-                bookingGridCellNode.style.backgroundColor =  'red'
+                bookingGridCellNode.style.backgroundColor = 'red'
                 bookingGridCellNode.setAttribute('class', 'unavailable-seat')
             }
-            
+
 
             bookingGridCellNode.innerText = j
             bookingGridNode.appendChild(bookingGridCellNode)
@@ -81,6 +81,14 @@ function createSeatsUi(availableSeats) {
 function selectSeat() {
     // this keyword here points to the node clicked
     this.classList.toggle('selected-seat')
+    const selectedSeats = document.getElementsByClassName('selected-seat')
+    const buttonNode = document.getElementById('book-ticket-btn')
+    if (selectedSeats.length > 0) {
+        buttonNode.classList.remove('v-none') // visible
+    } else {
+        buttonNode.classList.add('v-none') //non-visible
+    }
+
 }
 
 function removeVNoneClasseFromH3() {
