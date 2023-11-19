@@ -116,16 +116,32 @@ function bookTicket() {
 
     const confirmPurchaseFormNode = document.createElement('form')
     confirmPurchaseFormNode.innerHTML = `<label>Email</label>
-    <input required type="email" />
+    <input id="email" required type="email" />
     <label>Phone number</label>
-    <input required type="number" />`
+    <input id="phoneNumber" required type="number" />`
     const submitButtonNode = document.createElement('button')
     submitButtonNode.innerText = 'purchase'
+    submitButtonNode.addEventListener('click', confirmPurchase)
     confirmPurchaseFormNode.appendChild(submitButtonNode)
 
     confirmPurchaseContainerNode.appendChild(confirmPurchaseFormNode)
 
     bookerNode.appendChild(confirmPurchaseContainerNode)
+}
+
+function confirmPurchase(event) {
+    event.preventDefault()
+    const emailInput = document.getElementById('email')
+    const phoneNumberInput = document.getElementById('phoneNumber')
+    const email = emailInput.value
+    const phoneNumber = phoneNumberInput.value
+    const bookerNode = document.getElementById("booker")
+    bookerNode.innerHTML = `<div id="Success">
+    <h3>Booking Details</h3>
+    <h6>Seat numbers: ${selectedSeatNumbers.join(", ")}</h6>
+    <h6>Email: ${email}</h6>
+    <h6>Phone Number: ${phoneNumber}</h6>
+    </div>`
 }
 
 function removeVNoneClasseFromH3() {
