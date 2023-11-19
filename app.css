@@ -13,36 +13,38 @@
 }
 
 .link {
-    text-decoration: none;
-    color: white;
+  text-decoration: none;
+  color: white;
 }
 
 #link-container {
-    width: 40%;
-    display: flex;
-    justify-content: space-evenly;
+  width: 40%;
+  display: flex;
+  justify-content: space-evenly;
 }
 
 #loader {
-    position: fixed;
-    top: calc(50vh - 50px);
-    left: calc(50vw - 50px);
+  position: fixed;
+  top: calc(50vh - 50px);
+  left: calc(50vw - 50px);
 }
 
 #loader-image {
-    width: 100px;
-    height: 100px;
+  width: 100px;
+  height: 100px;
 }
+
 .movie-holder {
-    display: flex;
-    gap: 20px;
-    justify-content: center;
-    width: 100%;
-    padding: 12px;
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  width: 100%;
+  padding: 12px;
 }
+
 .movie-img-wrapper {
-    width: 120px;
-    height: 200px;
+  width: 120px;
+  height: 200px;
 }
 
 #booker-grid-holder {
@@ -60,7 +62,7 @@
   gap: 1.28vw
 }
 
-.booking-grid > div {
+.booking-grid>div {
   display: flex;
   width: 6.4vw;
   justify-content: center;
@@ -69,9 +71,14 @@
   height: 6vw;
 }
 
+.selected-seat {
+  border: 4px outset rgb(0, 0, 0)
+}
+
 .d-none {
   display: none;
 }
+
 .v-none {
   visibility: hidden;
 }

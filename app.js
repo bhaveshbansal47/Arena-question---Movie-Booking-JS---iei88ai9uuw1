@@ -46,6 +46,7 @@ function showSeats(movieName) {
     fetchMovieAvailability(movieName).then(function (availableSeats) {
         loader.remove()
         // removeVNoneClasses()
+        removeVNoneClasseFromH3()
         createSeatsUi(availableSeats)
     })
 }
@@ -59,7 +60,17 @@ function createSeatsUi(availableSeats) {
         for (let j = ((i - 1) * 12) + 1; j <= i * 12; j++) {
             const bookingGridCellNode = document.createElement('div')
             bookingGridCellNode.setAttribute('id', `booking-grid-${j}`)
-            bookingGridCellNode.style.backgroundColor = availableSeats.includes(j) ? 'green' : 'red'
+            const available = availableSeats.includes(j)
+            if(available) {
+                bookingGridCellNode.style.backgroundColor =  'green'
+                bookingGridCellNode.setAttribute('class', 'available-seat')
+                bookingGridCellNode.addEventListener('click', selectSeat)
+            } else {
+                bookingGridCellNode.style.backgroundColor =  'red'
+                bookingGridCellNode.setAttribute('class', 'unavailable-seat')
+            }
+            
+
             bookingGridCellNode.innerText = j
             bookingGridNode.appendChild(bookingGridCellNode)
         }
@@ -67,11 +78,14 @@ function createSeatsUi(availableSeats) {
     }
 }
 
-function removeVNoneClasses() {
-    const vNoneNodes = [...document.getElementsByClassName('v-none')]
-    for (const vNoneNode of vNoneNodes) {
-        vNoneNode.removeAttribute('class')
-    }
+function selectSeat() {
+    // this keyword here points to the node clicked
+    this.classList.toggle('selected-seat')
+}
+
+function removeVNoneClasseFromH3() {
+    const h3Node = document.querySelector('#booker h3')
+    h3Node.classList.remove('v-none')
 }
 
 function makeGrids() {
