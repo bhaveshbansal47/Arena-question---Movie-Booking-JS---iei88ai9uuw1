@@ -1,6 +1,8 @@
 import { fetchMovieAvailability, fetchMovieList } from "./api.js"
 const loader = document.getElementById('loader')
 const mainNode = document.getElementsByTagName('main')[0]
+const bookTicketButtonNode = document.getElementById('book-ticket-btn')
+bookTicketButtonNode.addEventListener('click', bookTicket)
 
 fetchMovieList().then(function (movies) {
     // part - 2
@@ -64,7 +66,9 @@ function createSeatsUi(availableSeats) {
             if (available) {
                 bookingGridCellNode.style.backgroundColor = 'green'
                 bookingGridCellNode.setAttribute('class', 'available-seat')
-                bookingGridCellNode.addEventListener('click', selectSeat)
+                bookingGridCellNode.addEventListener('click', function() {
+                    selectSeat(j, bookingGridCellNode)
+                })
             } else {
                 bookingGridCellNode.style.backgroundColor = 'red'
                 bookingGridCellNode.setAttribute('class', 'unavailable-seat')
@@ -78,17 +82,50 @@ function createSeatsUi(availableSeats) {
     }
 }
 
-function selectSeat() {
-    // this keyword here points to the node clicked
-    this.classList.toggle('selected-seat')
-    const selectedSeats = document.getElementsByClassName('selected-seat')
-    const buttonNode = document.getElementById('book-ticket-btn')
-    if (selectedSeats.length > 0) {
-        buttonNode.classList.remove('v-none') // visible
+let selectedSeatNumbers = []
+
+function selectSeat(seatNumber, seatNode) {
+    if(selectedSeatNumbers.includes(seatNumber)) {
+        selectedSeatNumbers.splice(selectedSeatNumbers.indexOf(seatNumber),1)
     } else {
-        buttonNode.classList.add('v-none') //non-visible
+        selectedSeatNumbers.push(seatNumber)
+    }
+    // this keyword here points to the node clicked
+    seatNode.classList.toggle('selected-seat')
+
+    const selectedSeats = document.getElementsByClassName('selected-seat')
+    
+    if (selectedSeats.length > 0) {
+        bookTicketButtonNode.classList.remove('v-none') // visible
+    } else {
+        bookTicketButtonNode.classList.add('v-none') //non-visible
     }
 
+}
+
+function bookTicket() {
+    const bookerNode = document.getElementById("booker")
+    bookerNode.innerHTML = ''
+
+    const confirmPurchaseContainerNode = document.createElement('div')
+    confirmPurchaseContainerNode.setAttribute('id', 'confirm-purchase')
+
+    const headingNode = document.createElement('h3')
+    headingNode.innerText = `Confirm your booking for seat numbers:${selectedSeatNumbers.join(", ")}`
+    confirmPurchaseContainerNode.appendChild(headingNode)
+
+    const confirmPurchaseFormNode = document.createElement('form')
+    confirmPurchaseFormNode.innerHTML = `<label>Email</label>
+    <input required type="email" />
+    <label>Phone number</label>
+    <input required type="number" />`
+    const submitButtonNode = document.createElement('button')
+    submitButtonNode.innerText = 'purchase'
+    confirmPurchaseFormNode.appendChild(submitButtonNode)
+
+    confirmPurchaseContainerNode.appendChild(confirmPurchaseFormNode)
+
+    bookerNode.appendChild(confirmPurchaseContainerNode)
 }
 
 function removeVNoneClasseFromH3() {
