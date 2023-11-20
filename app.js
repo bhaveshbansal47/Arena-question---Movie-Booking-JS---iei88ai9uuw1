@@ -6,8 +6,9 @@ bookTicketButtonNode.addEventListener('click', bookTicket)
 
 fetchMovieList().then(function (movies) {
     // part - 2
-    loader.remove()
     createMovieCardsUi(movies)
+    loader.remove()
+    
 })
 
 
